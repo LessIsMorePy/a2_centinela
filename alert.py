@@ -11,7 +11,7 @@ def play_alert():
     def _play():
         try:
             # winsound.Beep(1000, 1000)
-            winsound.PlaySound('D:/Python/Código/arcos/people_detection/sounds/bienvenido.m4a', 0)
+            winsound.PlaySound('D:/Python/Código/arcos/people_detection/sounds/bienvenido.wav', 0)
         except ImportError:
             # En entornos sin winsound (Linux/Docker), usar print como fallback
             print("\a[ALERTA] Persona detectada entrando a la tienda")
