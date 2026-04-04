@@ -1,0 +1,9 @@
+admin.py
+yolov8n.pt
+__pycache__/
+*.pyc
+*.pyo
+*.pt
+instrucciones.pdf
+cowork_instrucciones_tracking.md
+.idea/

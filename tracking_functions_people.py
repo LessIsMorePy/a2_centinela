@@ -59,7 +59,7 @@ def get_crossing_line():
     (entrada del fondo / calle trasera).
     Condición: prev_Y < line_Y <= curr_Y
     """
-    return (0, 650), (1920, 650)
+    return (0, 750), (1920, 700)
 
 
 def get_crossing_line_diagonal():
@@ -74,7 +74,7 @@ def get_crossing_line_diagonal():
 
     Ajustar X si la detección llega tarde o genera falsos positivos.
     """
-    return (1700, 1080), (1430, 420)
+    return (1650, 1080), (1280, 420)
 
 
 # ---------------------------------------------------------------------------
