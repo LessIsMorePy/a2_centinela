@@ -1,20 +1,44 @@
 import threading
+import random
 import winsound
+import os
+
+# ---------------------------------------------------------------------------
+# Archivos de audio disponibles (misma carpeta que este script)
+# ---------------------------------------------------------------------------
+
+_BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+_SOUNDS = [
+    'bienvenido.wav',
+    'hola2.wav',
+    'hola3.wav',
+    'hola4.wav',
+    'hola5.wav',
+    'hola6.wav',
+    'hola7.wav',
+]
+
+_last_sound = None   # evita repetir el mismo audio dos veces seguidas
 
 
 def play_alert():
     """
-    Reproduce un beep de alerta sin bloquear el hilo principal.
-    Usa winsound en Windows (frecuencia 1000 Hz, duración 400 ms).
-    Fallback a print si no está disponible (Linux / Docker).
+    Reproduce un audio de bienvenida distinto en cada llamada.
+    Nunca repite el mismo archivo dos veces consecutivas.
+    No bloquea el hilo principal.
     """
     def _play():
-        try:
-            # winsound.Beep(1000, 1000)
-            winsound.PlaySound('bienvenido.wav', 0)
-        except ImportError:
-            # En entornos sin winsound (Linux/Docker), usar print como fallback
-            print("\a[ALERTA] Persona detectada entrando a la tienda")
+        global _last_sound
 
-    t = threading.Thread(target=_play, daemon=True)
-    t.start()
+        pool = [s for s in _SOUNDS if s != _last_sound]
+        chosen = random.choice(pool)
+        _last_sound = chosen
+
+        path = os.path.join(_BASE_DIR, chosen)
+        try:
+            winsound.PlaySound(path, winsound.SND_FILENAME)
+        except Exception as e:
+            print(f"\a[ALERTA] Sin audio ({e})")
+
+    threading.Thread(target=_play, daemon=True).start()
