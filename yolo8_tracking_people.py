@@ -89,8 +89,8 @@ while cap.isOpened():
 
         prev_positions[track_id] = (rx, ry)
 
-    h, w = frame.shape[:2]
-    cv2.imshow('Monitor Arcos', cv2.resize(frame, (int(w * 0.4), int(h * 0.4))))
+    # h, w = frame.shape[:2]
+    # cv2.imshow('Monitor Arcos', cv2.resize(frame, (int(w * 0.4), int(h * 0.4))))
     frame_count += 1
 
 cap.release()

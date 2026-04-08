@@ -21,8 +21,6 @@ TASK_NAME   = 'Centinela_Arcos'
 SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
 WATCHDOG    = os.path.join(SCRIPT_DIR, 'watchdog.py')
 PYTHON_EXE  = sys.executable       # d:\centinela_env\python.exe
-LOGON_DELAY = '0:30'               # 30 s de espera tras el inicio de sesión
-                                   # (da tiempo a que la red y la cámara levanten)
 
 
 # ---------------------------------------------------------------------------
@@ -35,7 +33,6 @@ def register():
         '/TN', TASK_NAME,
         '/TR', f'"{PYTHON_EXE}" "{WATCHDOG}"',
         '/SC', 'ONLOGON',           # se ejecuta al iniciar sesión
-        '/DELAY', LOGON_DELAY,
         '/RL', 'HIGHEST',           # privilegios elevados
         '/IT',                      # permite interacción con el escritorio (ventana visible)
     ]
@@ -44,7 +41,7 @@ def register():
         print(f"✅  Tarea '{TASK_NAME}' registrada correctamente.")
         print(f"    Python  : {PYTHON_EXE}")
         print(f"    Script  : {WATCHDOG}")
-        print(f"    Trigger : Al iniciar sesión (con 30 s de retardo)")
+        print(f"    Trigger : Al iniciar sesión (watchdog espera 30s internamente)")
         print()
         print("El sistema se iniciará automáticamente la próxima vez que arranque Windows.")
     else:

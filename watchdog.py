@@ -18,7 +18,8 @@ import datetime
 
 SCRIPT        = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'yolo8_tracking_people.py')
 PYTHON        = sys.executable          # apunta al python.exe del ambiente conda
-RESTART_DELAY = 15                      # segundos de espera antes de reiniciar
+STARTUP_DELAY = 30                      # segundos de espera al arrancar Windows (red + cámara)
+RESTART_DELAY = 15                      # segundos de espera antes de reiniciar tras un fallo
 LOG_FILE      = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'watchdog.log')
 
 
@@ -42,8 +43,16 @@ log("=" * 60)
 log("Watchdog iniciado.")
 log(f"Script vigilado : {SCRIPT}")
 log(f"Python           : {PYTHON}")
+log(f"Delay arranque   : {STARTUP_DELAY}s")
 log(f"Delay reinicio   : {RESTART_DELAY}s")
 log("=" * 60)
+
+log(f"Esperando {STARTUP_DELAY}s para que la red y la cámara estén disponibles...")
+try:
+    time.sleep(STARTUP_DELAY)
+except KeyboardInterrupt:
+    log("Watchdog detenido por el usuario durante la espera inicial.")
+    sys.exit(0)
 
 while True:
     log("Lanzando proceso principal...")
