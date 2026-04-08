@@ -4,10 +4,10 @@ setup_startup.py — Registra el watchdog en el Task Scheduler de Windows.
 REQUISITO: Ejecutar UNA SOLA VEZ como Administrador:
     Clic derecho sobre este archivo → "Ejecutar con Python" como Administrador
     o desde una terminal con privilegios elevados:
-        d:\a2_centinela\python.exe setup_startup.py
+        d:\centinela_env\python.exe setup_startup.py
 
 Para eliminar la tarea más adelante:
-    d:\a2_centinela\python.exe setup_startup.py --remove
+    d:\centinela_env\python.exe setup_startup.py --remove
 """
 import subprocess
 import sys
@@ -20,7 +20,7 @@ import os
 TASK_NAME   = 'Centinela_Arcos'
 SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
 WATCHDOG    = os.path.join(SCRIPT_DIR, 'watchdog.py')
-PYTHON_EXE  = sys.executable       # d:\a2_centinela\python.exe
+PYTHON_EXE  = sys.executable       # d:\centinela_env\python.exe
 LOGON_DELAY = '0:30'               # 30 s de espera tras el inicio de sesión
                                    # (da tiempo a que la red y la cámara levanten)
 
